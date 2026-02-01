@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furkan Koruk | Level Up</title>
+    <title>Furkan Koruk | Level Up Portfolyo</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,6 +11,7 @@
             --neon-purple: #bc13fe;
             --dark-bg: #0a0b10;
             --card-bg: #161b22;
+            --terminal-green: #33ff33;
         }
 
         * {
@@ -24,23 +25,25 @@
             background-color: var(--dark-bg);
             color: white;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Scanline Efekti (Eski monitör çizgileri) */
+        /* CRT/Scanline Efekti */
         body::before {
             content: " ";
             display: block;
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             z-index: 9999;
             background-size: 100% 4px, 3px 100%;
             pointer-events: none;
         }
 
+        /* Navigasyon */
         nav {
-            background: rgba(10, 11, 16, 0.9);
+            background: rgba(10, 11, 16, 0.95);
             border-bottom: 2px solid var(--neon-blue);
             padding: 15px 5%;
             display: flex;
@@ -58,25 +61,17 @@
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
+        nav ul { display: flex; list-style: none; }
         nav ul li a {
             color: white;
             text-decoration: none;
             margin-left: 20px;
-            text-transform: uppercase;
             font-weight: bold;
             transition: 0.3s;
         }
+        nav ul li a:hover { color: var(--neon-blue); text-shadow: 0 0 8px var(--neon-blue); }
 
-        nav ul li a:hover {
-            color: var(--neon-blue);
-            text-shadow: 0 0 8px var(--neon-blue);
-        }
-
+        /* Hero / Giriş */
         header {
             height: 60vh;
             display: flex;
@@ -84,8 +79,8 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--dark-bg)),
-                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), var(--dark-bg)),
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070');
             background-size: cover;
             border-bottom: 1px solid var(--neon-purple);
         }
@@ -93,143 +88,237 @@
         header h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 4rem;
-            color: #fff;
             text-shadow: 0 0 20px var(--neon-blue);
-            margin-bottom: 10px;
         }
 
-        .status-bar {
+        /* Sağ Taraf Versiyon HUD (Heads-Up Display) */
+        .version-hud {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .version-item {
+            background: rgba(22, 27, 34, 0.9);
+            border-right: 4px solid var(--neon-purple);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+            transition: 0.4s;
+        }
+
+        .version-item.active {
+            border-right-color: var(--neon-blue);
+            box-shadow: -5px 0 15px rgba(0, 242, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .version-item button {
+            background: #333;
             border: 1px solid var(--neon-blue);
-            padding: 5px 20px;
-            border-radius: 20px;
-            background: rgba(0, 242, 255, 0.1);
+            color: var(--neon-blue);
+            cursor: pointer;
+            padding: 2px 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
         }
 
-        section {
-            padding: 60px 10%;
+        .version-item button:hover {
+            background: var(--neon-blue);
+            color: #000;
         }
 
+        /* İçerik Bölümleri */
+        section { padding: 60px 15%; }
         .section-title {
             font-family: 'Orbitron', sans-serif;
             color: var(--neon-purple);
-            text-transform: uppercase;
             margin-bottom: 30px;
             border-left: 5px solid var(--neon-purple);
             padding-left: 15px;
         }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
         .quest-card {
             background: var(--card-bg);
             border: 1px solid #333;
-            padding: 20px;
+            padding: 30px;
             position: relative;
-            transition: 0.3s;
         }
 
-        .quest-card:hover {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
-            transform: scale(1.02);
+        /* Modal (ASCII Bilgi Tablosu) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95);
         }
 
-        .skill-hex {
-            background: rgba(188, 19, 254, 0.1);
-            border: 2px solid var(--neon-purple);
+        .modal-content {
+            background: #050505;
+            margin: 5% auto;
             padding: 20px;
-            text-align: center;
-            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            border: 1px solid var(--neon-blue);
+            width: 80%;
+            max-width: 700px;
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.2);
         }
 
-        .btn-start {
+        .ascii-table {
+            color: var(--terminal-green);
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            background: #000;
+            padding: 20px;
+            border: 1px solid #111;
+            overflow-x: auto;
+        }
+
+        .close-btn {
+            color: #ff0055;
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            font-family: 'Orbitron';
+        }
+
+        .btn-action {
             background: #ff0055;
             color: white;
             font-family: 'Orbitron', sans-serif;
-            padding: 15px 40px;
+            padding: 12px 30px;
             border: none;
             cursor: pointer;
-            font-weight: bold;
             clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-            transition: 0.3s;
-            box-shadow: 0 0 15px #ff0055;
+            margin-top: 20px;
         }
 
-        .btn-start:hover {
-            background: #ff4785;
-            box-shadow: 0 0 25px #ff4785;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid #333;
-            font-size: 0.9rem;
-            color: #888;
-        }
+        footer { text-align: center; padding: 40px; color: #555; border-top: 1px solid #222; }
     </style>
 </head>
 <body>
 
+    <div class="version-hud">
+        <div class="version-item">
+            <span>V1.0.0</span>
+            <button onclick="openModal('v100')">INFO</button>
+        </div>
+        <div class="version-item">
+            <span>V1.1.0</span>
+            <button onclick="openModal('v110')">INFO</button>
+        </div>
+        <div class="version-item active">
+            <span>V1.2.0</span>
+            <button onclick="openModal('v120')">INFO</button>
+        </div>
+    </div>
+
+    <div id="versionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <h3 style="font-family:'Orbitron'; color:var(--neon-blue); margin-bottom:15px;">PATCH NOTES</h3>
+            <pre id="modalText" class="ascii-table"></pre>
+        </div>
+    </div>
+
     <nav>
-        <div class="logo">FURKAN_KORUK.EXE</div>
+        <div class="logo">FURKAN_KORUK.OS</div>
         <ul>
-            <li><a href="#about">DOSYA</a></li>
-            <li><a href="#skills">YETENEKLER</a></li>
-            <li><a href="#contact">MESAJ GÖNDER</a></li>
+            <li><a href="#about">GÜNLÜK</a></li>
+            <li><a href="#contact">SİNYAL</a></li>
         </ul>
     </nav>
 
     <header>
-        <div class="status-bar">PLAYER ONE READY</div>
-        <h1>FURKAN KORUK</h1>
-        <p>Game Developer | UI/UX Designer | Code Wizard</p>
+        <h1 id="user-name">FURKAN KORUK</h1>
+        <p style="letter-spacing: 5px; color: var(--neon-blue);">LEVEL 25 DEVELOPER</p>
     </header>
 
     <section id="about">
-        <h2 class="section-title">GÖREV GÜNLÜĞÜ (Hakkımda)</h2>
+        <h2 class="section-title">GÖREV GÜNLÜĞÜ</h2>
         <div class="quest-card">
-            <p>Sistem yükleniyor... Furkan Koruk, dijital dünyalarda macera arayan bir geliştiricidir. 
-               Kodu sanata, tasarımı ise deneyime dönüştürmek en büyük yeteneğidir.</p>
-            <br>
-            <p><strong>LEVEL:</strong> 25 | <strong>CLASS:</strong> Full-Stack Geliştirici</p>
-        </div>
-    </section>
-
-    <section id="skills">
-        <h2 class="section-title">YETENEK AĞACI</h2>
-        <div class="grid-container">
-            <div class="skill-hex">
-                <h3>HTML/CSS</h3>
-                <p>Mastery: 90%</p>
-            </div>
-            <div class="skill-hex">
-                <h3>JAVASCRIPT</h3>
-                <p>Mastery: 85%</p>
-            </div>
-            <div class="skill-hex">
-                <h3>DESIGN</h3>
-                <p>Mastery: 80%</p>
-            </div>
+            <p>> Sistem başarıyla başlatıldı...</p>
+            <p>> Kullanıcı: Furkan Koruk</p>
+            <p>> Görev: Kusursuz kullanıcı deneyimleri tasarlamak ve kodlamak.</p>
+            <p style="margin-top:20px;">Merhaba! Ben Furkan. Oyun dünyasının estetiğini web teknolojileriyle birleştiren bir geliştiriciyim.</p>
         </div>
     </section>
 
     <section id="contact" style="text-align: center;">
-        <h2 class="section-title">SİNYAL GÖNDER</h2>
-        <div style="max-width: 500px; margin: 0 auto; background: #161b22; padding: 30px; border: 1px dashed var(--neon-blue);">
-            <input type="text" placeholder="Kullanıcı Adı" style="width:100%; padding:10px; margin-bottom:10px; background:#000; color:white; border:1px solid #333;">
-            <textarea placeholder="Mesajınız..." style="width:100%; padding:10px; margin-bottom:20px; background:#000; color:white; border:1px solid #333;" rows="4"></textarea>
-            <button class="btn-start">PRESS START</button>
+        <h2 class="section-title">İLETİŞİM KANALI</h2>
+        <div class="quest-card">
+            <p>Yeni bir görev (proje) için sinyal gönderin:</p>
+            <button class="btn-action">MESAJI GÖNDER</button>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 Furkan Koruk. TÜM HAKLARI SAKLIDIR. LEVEL UP!</p>
+        <p>© 2026 Furkan Koruk - Sürüm: 1.2.0.exe - <span style="color:var(--neon-blue)">Ready Player One</span></p>
     </footer>
 
+    <script>
+        const versionData = {
+            'v100': `
++---------------------------------------+
+| SYSTEM INITIALIZATION - v1.0.0        |
++---------------------------------------+
+| [NEW] Core HTML5 framework            |
+| [NEW] Dark mode UI implementation     |
+| [NEW] Basic character profile         |
++---------------------------------------+
+| STATUS: STABLE                        |
++---------------------------------------+`,
+
+            'v110': `
++---------------------------------------+
+| GRAPHICS UPDATE - v1.1.0              |
++---------------------------------------+
+| [NEW] Neon color palette (Cyan/Purple)|
+| [NEW] CRT Scanline visual effects     |
+| [NEW] Responsive quest cards          |
++---------------------------------------+
+| [FIXED] Mobile navigation bug         |
+| [PREVIOUS] System Initialization      |
++---------------------------------------+`,
+
+            'v120': `
++---------------------------------------+
+| HUD & PATCHER UPDATE - v1.2.0         |
++---------------------------------------+
+| [NEW] Version Tracker (HUD)           |
+| [NEW] ASCII Patch Notes Table         |
+| [NEW] Orbitron Font integration       |
++---------------------------------------+
+| [PREVIOUS] Graphics Update (v1.1.0)   |
+| [PREVIOUS] System Base (v1.0.0)       |
++---------------------------------------+`
+        };
+
+        function openModal(ver) {
+            document.getElementById('modalText').innerText = versionData[ver];
+            document.getElementById('versionModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('versionModal').style.display = "none";
+        }
+
+        // Modal dışına tıklandığında kapatma
+        window.onclick = function(event) {
+            let modal = document.getElementById('versionModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
