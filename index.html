@@ -3,197 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furkan Koruk | Cyber Portfolio</title>
+    <title>Furkan Koruk | Cyber-Station v5.1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --neon-blue: #00f3ff;
-            --neon-purple: #7a1b99;
-            --bg-dark: #08090b;
-            --panel-bg: #121317;
+        :root { --neon-blue: #00f2ff; --neon-purple: #bc13fe; --bg-dark: #020205; }
+        html { scroll-behavior: smooth; }
+        body { 
+            margin: 0; background: var(--bg-dark); color: white; 
+            font-family: 'Rajdhani', sans-serif; overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #101020 0%, #020205 100%);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
+        /* --- PANELLER --- */
+        .side-dock {
+            position: fixed; top: 0; width: 65px; height: 100vh;
+            background: rgba(10, 10, 20, 0.95); backdrop-filter: blur(10px);
+            z-index: 3000; transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column; overflow: hidden;
+            border-image: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple)) 1;
         }
 
-        /* Yan Paneller - Fotoğraftaki gibi */
-        .side-bar {
-            width: 160px;
-            display: flex;
-            flex-direction: column;
-            padding: 20px 10px;
-            background: #000;
-            position: relative;
-        }
+        #left-dock { left: 0; border-right: 2px solid var(--neon-purple); }
+        #left-dock:hover { width: 260px; }
 
-        /* Sol Panel Çizgisi (Mor/Magenta) */
-        .side-left { border-right: 2px solid var(--neon-purple); }
-        /* Sağ Panel Çizgisi (Mavi) */
-        .side-right { border-left: 2px solid var(--neon-blue); }
+        #right-dock { right: 0; border-left: 2px solid var(--neon-blue); }
+        #right-dock:hover { width: 260px; }
 
-        .panel-header {
-            font-size: 10px;
-            color: #444;
+        /* Versiyon Yazıları */
+        .ver-tag {
+            position: absolute; bottom: 20px; left: 15px;
+            font-family: 'Orbitron'; font-size: 0.6rem; color: #444;
             letter-spacing: 2px;
-            margin-bottom: 20px;
-            font-weight: bold;
+        }
+        #right-dock .ver-tag { left: auto; right: 15px; }
+
+        .dock-header {
+            writing-mode: vertical-rl; text-orientation: mixed;
+            padding: 20px 15px; color: var(--neon-blue); font-family: 'Orbitron';
+            font-size: 0.75rem; letter-spacing: 4px; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .side-dock:hover .dock-header { display: none; }
+
+        .dock-content { display: none; padding: 40px 20px; width: 220px; }
+        .side-dock:hover .dock-content { display: block; }
+
+        /* --- BUTON VE PROTOKOL EFEKTİ --- */
+        .item {
+            text-decoration: none; color: white; padding: 15px; margin-bottom: 12px;
+            display: block; background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+            font-family: 'Orbitron'; font-size: 0.7rem; cursor: pointer;
+            position: relative; clip-path: polygon(0 0, 100% 0, 100% 75%, 85% 100%, 0 100%);
         }
 
-        /* Fotoğraftaki Buton Tasarımı */
-        .cyber-btn {
-            display: block;
-            text-decoration: none;
-            color: #999;
-            background: #1a1b1f;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            font-size: 11px;
-            letter-spacing: 1px;
-            clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0% 100%);
-            border: 1px solid #222;
-            transition: 0.2s;
-        }
+        #left-dock .item:hover { border-color: var(--neon-purple); background: rgba(188, 19, 254, 0.1); }
+        #right-dock .item:hover { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.1); }
 
-        .side-left .cyber-btn:hover {
-            background: #2a1535;
-            color: #fff;
-            border-color: var(--neon-purple);
-        }
+        /* Durum Yazısı Stili */
+        .status-text { font-size: 0.55rem; color: var(--neon-blue); display: block; margin-top: 5px; opacity: 0.7; }
 
-        .side-right .cyber-btn:hover {
-            background: #0d2a35;
-            color: #fff;
-            border-color: var(--neon-blue);
-        }
+        /* --- ORTA ALAN --- */
+        section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .hero-title { font-family: 'Orbitron'; font-size: 4rem; text-shadow: 0 0 20px var(--neon-blue); margin: 0; }
 
-        /* Orta Alan */
-        .main-container {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            background: radial-gradient(circle at center, #0f1115 0%, #08090b 100%);
-        }
-
-        .title {
-            font-size: 4.5rem;
-            letter-spacing: 10px;
-            text-transform: uppercase;
-            text-shadow: 0 0 30px var(--neon-blue);
-            margin-bottom: 5px;
-        }
-
-        .status-text {
-            color: var(--neon-blue);
-            letter-spacing: 6px;
-            font-size: 14px;
-            margin-bottom: 60px;
-        }
-
-        /* Orta Metin Alanı */
-        .description {
-            max-width: 600px;
-            border-left: 3px solid var(--neon-purple);
-            padding-left: 20px;
-            margin-bottom: 50px;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #ddd;
-        }
-
-        .description b { color: #fff; }
-
-        /* Alt Kutular */
-        .grid-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid #1a1b1f;
-            padding: 25px;
-        }
-
-        .card h3 {
-            color: var(--neon-blue);
-            font-size: 14px;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            font-size: 12px;
-            color: #888;
-            line-height: 1.6;
-        }
-
-        /* Sağdaki Dikey Metin */
-        .vertical-text {
-            position: absolute;
-            right: 15px;
-            bottom: 100px;
-            transform: rotate(90deg);
-            transform-origin: bottom right;
-            color: var(--neon-blue);
-            font-size: 12px;
-            letter-spacing: 4px;
-            opacity: 0.6;
-        }
     </style>
 </head>
 <body>
 
-    <div class="side-bar side-left">
-        <div class="panel-header">// DEV_ENVIRONMENT</div>
-        <a href="https://github.com/KULLANICI_ADIN" target="_blank" class="cyber-btn">GITHUB</a>
-        <a href="#" class="cyber-btn">VS CODE</a>
-        <a href="https://unity.com" target="_blank" class="cyber-btn">UNITY</a>
-        <a href="https://www.python.org" target="_blank" class="cyber-btn">PYTHON</a>
-        <a href="#" class="cyber-btn">C#</a>
-        <a href="#" class="cyber-btn">PROJECT_FILES</a>
-    </div>
-
-    <div class="main-container">
-        <h1 class="title">FURKAN KORUK</h1>
-        <div class="status-text">STATUS: ACTIVE</div>
-
-        <div class="description">
-            <p><b>Neden Yazılım?</b> Çünkü koda dokunduğum an, kuralları benim koyduğum bir evren inşa ediyorum. Sadece ekrana yazı yazmıyorum; dünyayı daha interaktif bir hale getirmek için dijital katmanlar oluşturuyorum.</p>
+    <div id="left-dock" class="side-dock">
+        <div class="dock-header" style="color: var(--neon-purple);">DEV_CORE</div>
+        <div class="dock-content">
+            <a onclick="runProtocol(this, 'https://github.com')" class="item">
+                GITHUB <span class="status-text">IDLE</span>
+            </a>
+            <a onclick="runProtocol(this, 'https://visualstudio.microsoft.com')" class="item">
+                VS CODE <span class="status-text">IDLE</span>
+            </a>
+            <a onclick="runProtocol(this, '#ar-exp')" class="item">
+                AR_CORE <span class="status-text">IDLE</span>
+            </a>
         </div>
+        <div class="ver-tag">VER_1.1.1</div>
+    </div>
 
-        <div class="grid-info">
-            <div class="card">
-                <h3>VİZYON</h3>
-                <p>Karmaşık problemleri, temiz kod ve etkileyici görsellerle çözmek. AR teknolojisini herkes için erişilebilir kılmak.</p>
-            </div>
-            <div class="card">
-                <h3>HEDEF</h3>
-                <p>Fiziksel dünya ile dijital dünyayı ayıran o ince çizgiyi tamamen ortadan kaldıracak sistemler geliştirmek.</p>
-            </div>
+    <div id="right-dock" class="side-dock">
+        <div class="dock-header">SYSTEM_TOOLS</div>
+        <div class="dock-content">
+            <a onclick="runProtocol(this, 'https://youtube.com')" class="item">
+                YOUTUBE <span class="status-text">IDLE</span>
+            </a>
+            <a onclick="runProtocol(this, 'https://unity.com')" class="item">
+                UNITY ENGINE <span class="status-text">IDLE</span>
+            </a>
+            <a onclick="runProtocol(this, '#')" class="item">
+                SYSTEM_AI <span class="status-text">IDLE</span>
+            </a>
         </div>
+        <div class="ver-tag">VER_1.5</div>
     </div>
 
-    <div class="side-bar side-right">
-        <div class="panel-header">// SOCIAL_&_ENGINE</div>
-        <a href="https://youtube.com/@KANAL_ADIN" target="_blank" class="cyber-btn">YOUTUBE</a>
-        <a href="EPIC_PROFIL_LINKIN_BURAYA" target="_blank" class="cyber-btn">EPIC GAMES</a>
-        <a href="STEAM_PROFIL_LINKIN_BURAYA" target="_blank" class="cyber-btn">STEAM</a>
-        
-        <div class="vertical-text">SOCIAL_&_ENGINE</div>
-    </div>
+    <section>
+        <h1 class="hero-title">FURKAN KORUK</h1>
+        <p style="color:var(--neon-purple); font-family:'Orbitron'; letter-spacing:10px;">PROTOCOL ACTIVE</p>
+    </section>
+
+    <script>
+        function runProtocol(element, url) {
+            const status = element.querySelector('.status-text');
+            
+            // 1. Aşama: Initializing
+            status.innerText = "INITIALIZING...";
+            status.style.color = "orange";
+
+            // 2. Aşama: Accepted & Tick (1 saniye sonra)
+            setTimeout(() => {
+                status.innerText = "ACCEPTED ✅";
+                status.style.color = "var(--neon-blue)";
+                
+                // 3. Aşama: Yönlendirme (Yarım saniye sonra)
+                setTimeout(() => {
+                    if(url.startsWith('#')) {
+                        document.querySelector(url).scrollIntoView();
+                    } else {
+                        window.open(url, '_blank');
+                    }
+                    // Reset
+                    status.innerText = "IDLE";
+                    status.style.color = "";
+                }, 800);
+                
+            }, 1200);
+        }
+    </script>
 
 </body>
 </html>
