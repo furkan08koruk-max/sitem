@@ -2,359 +2,108 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furkan Koruk | Cyber-Portfolio v1.2.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Furkan Koruk | Cyber-Station v3.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --neon-blue: #00f2ff;
-            --neon-purple: #bc13fe;
-            --dark-bg: #0a0b10;
-            --card-bg: #161b22;
-            --terminal-green: #33ff33;
+        :root { --neon-blue: #00f2ff; --neon-purple: #bc13fe; --bg-dark: #050505; }
+        body { margin: 0; background: var(--bg-dark); color: white; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+
+        /* --- ANA TASARIM KORUNDU --- */
+        .main-header { text-align: center; margin-top: 50px; font-family: 'Orbitron'; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+
+        /* --- YENİ: GİZLİ SAĞ PANEL (SIDE DOCK) --- */
+        .side-dock-trigger {
+            position: fixed; right: 0; top: 0; width: 40px; height: 100vh;
+            z-index: 2000; /* Fareyi yakalamak için görünmez tetikleyici */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: white;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Scanline Efekti */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 9999;
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
-        }
-
-        /* Sağ Taraf Versiyon HUD */
-        .version-hud {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 9998;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .version-item {
-            background: rgba(22, 27, 34, 0.9);
-            border-right: 4px solid var(--neon-purple);
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-            transition: 0.4s;
-        }
-
-        .version-item.active {
-            border-right-color: var(--neon-blue);
-            box-shadow: -5px 0 15px rgba(0, 242, 255, 0.3);
-            transform: translateX(-5px);
-        }
-
-        .version-item button {
-            background: #333;
-            border: 1px solid var(--neon-blue);
-            color: var(--neon-blue);
-            cursor: pointer;
-            padding: 2px 6px;
-            font-family: 'Orbitron';
-            font-size: 0.5rem;
-        }
-
-        .version-item button:hover { background: var(--neon-blue); color: #000; }
-
-        /* Navigasyon */
-        nav {
+        .side-dock {
+            position: fixed; right: -260px; top: 0; width: 250px; height: 100vh;
             background: rgba(10, 11, 16, 0.95);
-            border-bottom: 2px solid var(--neon-blue);
-            padding: 15px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            border-left: 2px solid var(--neon-blue);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2001;
+            display: flex; flex-direction: column; padding: 40px 20px;
+            box-shadow: -10px 0 30px rgba(0, 242, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
+        /* Mouse sağa gelince paneli aç */
+        .side-dock-trigger:hover + .side-dock, .side-dock:hover {
+            right: 0;
         }
 
-        /* Hero */
-        header {
-            height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), var(--dark-bg)),
-                        url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070');
-            background-size: cover;
-            text-align: center;
+        .dock-title {
+            font-family: 'Orbitron'; font-size: 0.9rem; color: var(--neon-purple);
+            margin-bottom: 30px; letter-spacing: 2px; border-bottom: 1px solid var(--neon-purple);
+            padding-bottom: 10px; text-transform: uppercase;
         }
 
-        header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            text-shadow: 0 0 20px var(--neon-blue);
-            margin-bottom: 5px;
+        .dock-item {
+            margin-bottom: 20px; padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; gap: 15px;
+            text-decoration: none; color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 90% 100%, 0 100%);
         }
 
-        /* İçerik Alanları */
-        section { padding: 40px 15%; }
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-purple);
-            margin-bottom: 30px;
-            border-left: 5px solid var(--neon-purple);
-            padding-left: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Teknoloji Kartları */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .tech-card {
-            background: rgba(22, 27, 34, 0.6);
-            border: 1px solid #333;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            transition: 0.3s;
-        }
-
-        .tech-card:hover {
+        .dock-item:hover {
+            background: rgba(0, 242, 255, 0.1);
             border-color: var(--neon-blue);
-            background: rgba(0, 242, 255, 0.05);
+            transform: translateX(-10px);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
         }
 
-        .tech-icon {
-            font-family: 'Orbitron';
-            font-size: 1.2rem;
-            color: var(--neon-blue);
-            width: 50px; height: 50px;
-            border: 1px solid var(--neon-blue);
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 0 5px var(--neon-blue);
-        }
+        .dock-item i { color: var(--neon-blue); font-size: 1.2rem; }
+        .dock-item span { font-size: 1rem; font-weight: 500; }
 
-        .power-bar {
-            height: 6px;
-            background: #000;
-            border: 1px solid #222;
-            margin: 10px 0;
-            width: 100%;
+        /* Arka Plan Dekorasyonu */
+        .scanline {
+            width: 100%; height: 2px; background: rgba(0, 242, 255, 0.1);
+            position: absolute; bottom: 10%; left: 0;
+            animation: moveUp 5s linear infinite;
         }
+        @keyframes moveUp { from { bottom: 0%; } to { bottom: 100%; } }
 
-        .fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        /* Modal / ASCII Table */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-        }
-
-        .modal-content {
-            background: #050505;
-            margin: 5% auto;
-            padding: 25px;
-            border: 1px solid var(--neon-blue);
-            width: 90%; max-width: 650px;
-        }
-
-        .ascii-table {
-            color: var(--terminal-green);
-            font-family: 'Courier New', monospace;
-            white-space: pre-wrap;
-            background: #000;
-            padding: 15px;
-            border: 1px solid #111;
-            font-size: 0.85rem;
-        }
-
-        .close-btn {
-            color: #ff0055;
-            float: right;
-            font-size: 2rem;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #111; font-size: 0.8rem; }
-
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.5rem; }
-            section { padding: 40px 5%; }
-            .version-hud { display: none; } /* Mobilde yan paneli gizle */
-        }
     </style>
 </head>
 <body>
 
-    <div class="version-hud">
-        <div class="version-item">
-            <span>V1.0.0</span>
-            <button onclick="openModal('v100')">INFO</button>
-        </div>
-        <div class="version-item">
-            <span>V1.1.0</span>
-            <button onclick="openModal('v110')">INFO</button>
-        </div>
-        <div class="version-item active">
-            <span>V1.2.0</span>
-            <button onclick="openModal('v120')">INFO</button>
-        </div>
-    </div>
-
-    <div id="versionModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">×</span>
-            <h2 style="font-family:'Orbitron'; color:var(--neon-blue); margin-bottom:15px; font-size:1rem;">> PATCH_NOTES.LOG</h2>
-            <pre id="modalText" class="ascii-table"></pre>
-        </div>
-    </div>
-
-    <nav>
-        <div class="logo">FURKAN_KORUK.SYS</div>
-        <div style="font-size: 0.8rem; color: var(--terminal-green);">STATUS: ONLINE</div>
-    </nav>
-
-    <header>
+    <header class="main-header">
         <h1>FURKAN KORUK</h1>
-        <p style="letter-spacing: 8px; color: var(--neon-blue); font-weight: bold;">SOFTWARE ARCHITECT</p>
+        <p>CYBER ARCHITECT | AR DEVELOPER</p>
     </header>
 
-    <section id="about">
-        <h2 class="section-title">GÖREV GÜNLÜĞÜ</h2>
-        <div style="background: var(--card-bg); padding: 25px; border-left: 3px solid var(--neon-blue);">
-            <p>> Yazılım dünyasında karmaşık problemleri basit kodlarla çözüyorum.</p>
-            <p>> Uzmanlık Alanı: Oyun Geliştirme ve Otomasyon.</p>
+    <div class="side-dock-trigger"></div>
+
+    <div class="side-dock">
+        <div class="dock-title">Quick Access</div>
+        
+        <a href="https://youtube.com" target="_blank" class="dock-item">
+            <span>📺 YOUTUBE</span>
+        </a>
+
+        <a href="https://unity.com" target="_blank" class="dock-item">
+            <span>🎮 UNITY ENGINE</span>
+        </a>
+
+        <a href="https://github.com" target="_blank" class="dock-item">
+            <span>💾 GITHUB REPO</span>
+        </a>
+
+        <a href="#" class="dock-item">
+            <span>🛠 PROJECTS</span>
+        </a>
+
+        <div class="scanline"></div>
+        <div style="margin-top: auto; font-size: 0.6rem; color: gray; font-family: monospace;">
+            SYSTEM_STATUS: ONLINE<br>
+            ENCRYPTION: ACTIVE
         </div>
-    </section>
+    </div>
 
-    <section id="tech-stack">
-        <h2 class="section-title">YÜKLÜ MODÜLLER</h2>
-        <div class="tech-grid">
-            <div class="tech-card">
-                <div class="tech-icon">U</div>
-                <div style="flex-grow: 1;">
-                    <h3 style="letter-spacing: 2px;">UNITY</h3>
-                    <div class="power-bar"><div class="fill" style="width: 90%;"></div></div>
-                    <small style="color: #888;">ENGINE STATUS: OPTIMIZED</small>
-                </div>
-            </div>
-            
-            <div class="tech-card">
-                <div class="tech-icon">C#</div>
-                <div style="flex-grow: 1;">
-                    <h3 style="letter-spacing: 2px;">C-SHARP</h3>
-                    <div class="power-bar"><div class="fill" style="width: 85%;"></div></div>
-                    <small style="color: #888;">COMPILER: READY</small>
-                </div>
-            </div>
-
-            <div class="tech-card">
-                <div class="tech-icon">PY</div>
-                <div style="flex-grow: 1;">
-                    <h3 style="letter-spacing: 2px;">PYTHON</h3>
-                    <div class="power-bar"><div class="fill" style="width: 75%;"></div></div>
-                    <small style="color: #888;">SCRIPTS: EXECUTING</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>TERMINAL VERSION 1.2.0 | NO RIGHTS RESERVED - HACK THE WORLD</p>
-    </footer>
-
-    <script>
-        const versionData = {
-            'v100': `
-+---------------------------------------+
-| SYSTEM DEPLOYMENT - v1.0.0            |
-+---------------------------------------+
-| [NEW] Basic HTML Architecture         |
-| [NEW] Dark Theme Implementation       |
-| [NEW] Profile Overview                |
-+---------------------------------------+
-| BOOT: SUCCESSFUL                      |
-+---------------------------------------+`,
-
-            'v110': `
-+---------------------------------------+
-| NEON INTERFACE - v1.1.0               |
-+---------------------------------------+
-| [NEW] Cyberpunk Visual Overhaul       |
-| [NEW] Scanline Shader Effects         |
-| [NEW] Responsive Design Fixes         |
-+---------------------------------------+
-| PREV: v1.0.0                          |
-+---------------------------------------+`,
-
-            'v120': `
-+---------------------------------------+
-| TECH STACK UPDATE - v1.2.0            |
-+---------------------------------------+
-| [NEW] Unity Engine Integration        |
-| [NEW] C# Core Scripting Module        |
-| [NEW] Python Automation Hub           |
-| [NEW] HUD Patch Notes Panel           |
-+---------------------------------------+
-| PREV: v1.1.0, v1.0.0                  |
-+---------------------------------------+`
-        };
-
-        function openModal(ver) {
-            document.getElementById('modalText').innerText = versionData[ver];
-            document.getElementById('versionModal').style.display = "block";
-        }
-
-        function closeModal() {
-            document.getElementById('versionModal').style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            let modal = document.getElementById('versionModal');
-            if (event.target == modal) closeModal();
-        }
-    </script>
-</body>
+    </body>
 </html>
