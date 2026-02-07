@@ -2,108 +2,121 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Furkan Koruk | Cyber-Station v3.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furkan Koruk | Cyber-Architect v4.0</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        :root { --neon-blue: #00f2ff; --neon-purple: #bc13fe; --bg-dark: #050505; }
-        body { margin: 0; background: var(--bg-dark); color: white; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
-
-        /* --- ANA TASARIM KORUNDU --- */
-        .main-header { text-align: center; margin-top: 50px; font-family: 'Orbitron'; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-
-        /* --- YENİ: GİZLİ SAĞ PANEL (SIDE DOCK) --- */
-        .side-dock-trigger {
-            position: fixed; right: 0; top: 0; width: 40px; height: 100vh;
-            z-index: 2000; /* Fareyi yakalamak için görünmez tetikleyici */
+        :root { --neon-blue: #00f2ff; --neon-purple: #bc13fe; --bg-dark: #020205; }
+        
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            margin: 0; background: var(--bg-dark); color: white; 
+            font-family: 'Rajdhani', sans-serif; overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #101020 0%, #020205 100%);
         }
 
-        .side-dock {
-            position: fixed; right: -260px; top: 0; width: 250px; height: 100vh;
-            background: rgba(10, 11, 16, 0.95);
-            border-left: 2px solid var(--neon-blue);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 2001;
-            display: flex; flex-direction: column; padding: 40px 20px;
-            box-shadow: -10px 0 30px rgba(0, 242, 255, 0.1);
-            backdrop-filter: blur(10px);
+        /* --- ORTAK PANEL STİLLERİ --- */
+        .side-panel {
+            position: fixed; top: 0; width: 220px; height: 100vh;
+            background: rgba(5, 5, 10, 0.9); backdrop-filter: blur(15px);
+            z-index: 2000; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex; flex-direction: column; padding: 40px 15px;
         }
 
-        /* Mouse sağa gelince paneli aç */
-        .side-dock-trigger:hover + .side-dock, .side-dock:hover {
-            right: 0;
-        }
+        /* SOL PANEL: NAVİGASYON */
+        #left-panel { left: -230px; border-right: 2px solid var(--neon-purple); }
+        .left-trigger { position: fixed; left: 0; top: 0; width: 30px; height: 100vh; z-index: 2001; }
+        .left-trigger:hover + #left-panel, #left-panel:hover { left: 0; }
 
-        .dock-title {
-            font-family: 'Orbitron'; font-size: 0.9rem; color: var(--neon-purple);
-            margin-bottom: 30px; letter-spacing: 2px; border-bottom: 1px solid var(--neon-purple);
-            padding-bottom: 10px; text-transform: uppercase;
-        }
+        /* SAĞ PANEL: ARAÇLAR */
+        #right-panel { right: -230px; border-left: 2px solid var(--neon-blue); }
+        .right-trigger { position: fixed; right: 0; top: 0; width: 30px; height: 100vh; z-index: 2001; }
+        .right-trigger:hover + #right-panel, #right-panel:hover { right: 0; }
 
-        .dock-item {
-            margin-bottom: 20px; padding: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 242, 255, 0.1);
-            cursor: pointer; transition: 0.3s;
-            display: flex; align-items: center; gap: 15px;
-            text-decoration: none; color: white;
-            clip-path: polygon(0 0, 100% 0, 100% 80%, 90% 100%, 0 100%);
-        }
+        .panel-title { font-family: 'Orbitron'; font-size: 0.8rem; color: #555; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
 
-        .dock-item:hover {
-            background: rgba(0, 242, 255, 0.1);
-            border-color: var(--neon-blue);
-            transform: translateX(-10px);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+        .nav-item, .tool-item {
+            text-decoration: none; color: white; padding: 12px; margin-bottom: 10px;
+            display: block; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);
+            transition: 0.3s; clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
         }
+        .nav-item:hover { border-color: var(--neon-purple); transform: translateX(5px); background: rgba(188, 19, 254, 0.1); }
+        .tool-item:hover { border-color: var(--neon-blue); transform: translateX(-5px); background: rgba(0, 242, 255, 0.1); }
 
-        .dock-item i { color: var(--neon-blue); font-size: 1.2rem; }
-        .dock-item span { font-size: 1rem; font-weight: 500; }
+        /* --- ANA İÇERİK BÖLÜMLERİ --- */
+        section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 20px; box-sizing: border-box; }
+        
+        .section-header { font-family: 'Orbitron'; font-size: 2.5rem; color: var(--neon-blue); margin-bottom: 30px; text-shadow: 0 0 15px var(--neon-blue); }
 
-        /* Arka Plan Dekorasyonu */
-        .scanline {
-            width: 100%; height: 2px; background: rgba(0, 242, 255, 0.1);
-            position: absolute; bottom: 10%; left: 0;
-            animation: moveUp 5s linear infinite;
+        /* Hakkımda Kutusu */
+        .content-card {
+            max-width: 800px; padding: 30px; background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0, 242, 255, 0.2); position: relative;
         }
-        @keyframes moveUp { from { bottom: 0%; } to { bottom: 100%; } }
+        .content-card::before { content: ""; position: absolute; top: -5px; left: -5px; width: 20px; height: 20px; border-top: 2px solid var(--neon-purple); border-left: 2px solid var(--neon-purple); }
+
+        /* Yazılım Araçları Grid */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; width: 100%; max-width: 800px; }
+        .tool-card { padding: 20px; text-align: center; border: 1px solid var(--neon-purple); background: rgba(188, 19, 254, 0.05); }
 
     </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <h1>FURKAN KORUK</h1>
-        <p>CYBER ARCHITECT | AR DEVELOPER</p>
-    </header>
+    <div class="left-trigger"></div>
+    <div class="right-trigger"></div>
 
-    <div class="side-dock-trigger"></div>
-
-    <div class="side-dock">
-        <div class="dock-title">Quick Access</div>
-        
-        <a href="https://youtube.com" target="_blank" class="dock-item">
-            <span>📺 YOUTUBE</span>
-        </a>
-
-        <a href="https://unity.com" target="_blank" class="dock-item">
-            <span>🎮 UNITY ENGINE</span>
-        </a>
-
-        <a href="https://github.com" target="_blank" class="dock-item">
-            <span>💾 GITHUB REPO</span>
-        </a>
-
-        <a href="#" class="dock-item">
-            <span>🛠 PROJECTS</span>
-        </a>
-
-        <div class="scanline"></div>
-        <div style="margin-top: auto; font-size: 0.6rem; color: gray; font-family: monospace;">
-            SYSTEM_STATUS: ONLINE<br>
-            ENCRYPTION: ACTIVE
-        </div>
+    <div id="left-panel" class="side-panel">
+        <div class="panel-title">Navigation</div>
+        <a href="#home" class="nav-item">01. HOME</a>
+        <a href="#about" class="nav-item">02. ABOUT ME</a>
+        <a href="#tools" class="nav-item">03. TECH STACK</a>
+        <a href="#ar-exp" class="nav-item">04. AR EXPERIENCE</a>
     </div>
 
-    </body>
+    <div id="right-panel" class="side-panel">
+        <div class="panel-title">Quick Links</div>
+        <a href="https://youtube.com" target="_blank" class="tool-item">YOUTUBE</a>
+        <a href="https://unity.com" target="_blank" class="tool-item">UNITY</a>
+        <a href="https://github.com" target="_blank" class="tool-item">GITHUB</a>
+        <a href="#" class="tool-item">AI LAB</a>
+    </div>
+
+    <section id="home">
+        <h1 class="section-header" style="font-size: 4rem;">FURKAN KORUK</h1>
+        <p style="letter-spacing: 5px; color: var(--neon-purple);">>>> SYSTEM ARCHITECT & DEVELOPER <<<</p>
+        <div style="margin-top: 50px; color: gray;">SCROLL TO INITIALIZE DATA...</div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-header">ABOUT ME</h2>
+        <div class="content-card">
+            <p>Siber dünya ve artırılmış gerçeklik teknolojileri üzerine projeler geliştiren bir geliştiriciyim. Gerçek dünyayı dijital verilerle harmanlayarak kullanıcı deneyimini bir üst seviyeye taşımaya odaklanıyorum.</p>
+            <p style="color: var(--neon-blue);">Status: Designing the Future...</p>
+        </div>
+    </section>
+
+    <section id="tools">
+        <h2 class="section-header">SOFTWARE TOOLS</h2>
+        <div class="tools-grid">
+            <div class="tool-card">Unity 3D</div>
+            <div class="tool-card">AR.js</div>
+            <div class="tool-card">A-Frame</div>
+            <div class="tool-card">Three.js</div>
+            <div class="tool-card">JavaScript</div>
+            <div class="tool-card">C# (Unity)</div>
+        </div>
+    </section>
+
+    <section id="ar-exp">
+        <h2 class="section-header">AR MODULE</h2>
+        <p>AR Projesini bu bölümde görüntüleyebilirsin.</p>
+        <a href="#" style="padding: 15px 30px; border: 1px solid var(--neon-blue); color: var(--neon-blue); text-decoration: none; font-family: 'Orbitron';">LAUNCH CAMERA</a>
+    </section>
+
+</body>
 </html>
