@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furkan Koruk | Cyber-Core v4.1</title>
+    <title>Furkan Koruk | Cyber-Core v4.2</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -14,115 +13,109 @@
         body { 
             margin: 0; background: var(--bg-dark); color: white; 
             font-family: 'Rajdhani', sans-serif; overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #101020 0%, #020205 100%);
+            background-image: linear-gradient(to bottom, #050510 0%, #020205 100%);
         }
 
-        /* --- SOL PANEL (NAVIGASYON) --- */
-        .left-trigger { position: fixed; left: 0; top: 0; width: 30px; height: 100vh; z-index: 2001; }
-        #left-panel {
-            position: fixed; left: -240px; top: 0; width: 220px; height: 100vh;
-            background: rgba(5, 5, 15, 0.95); border-right: 2px solid var(--neon-purple);
-            z-index: 2000; transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex; flex-direction: column; padding: 40px 15px; backdrop-filter: blur(10px);
+        /* --- SABİT YAN PANELLER (Görünürlüğü Artırıldı) --- */
+        .side-dock {
+            position: fixed; top: 0; width: 200px; height: 100vh;
+            background: rgba(10, 10, 20, 0.8); backdrop-filter: blur(10px);
+            z-index: 3000; transition: 0.5s; display: flex; flex-direction: column; padding: 40px 15px;
+            border-image: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple)) 1;
         }
-        .left-trigger:hover + #left-panel, #left-panel:hover { left: 0; }
 
-        /* --- SAĞ PANEL (ARAÇLAR) --- */
-        .right-trigger { position: fixed; right: 0; top: 0; width: 30px; height: 100vh; z-index: 2001; }
-        #right-panel {
-            position: fixed; right: -240px; top: 0; width: 220px; height: 100vh;
-            background: rgba(5, 5, 15, 0.95); border-left: 2px solid var(--neon-blue);
-            z-index: 2000; transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex; flex-direction: column; padding: 40px 15px; backdrop-filter: blur(10px);
+        #left-dock { left: -160px; border-right: 2px solid var(--neon-purple); }
+        #left-dock:hover { left: 0; background: rgba(10, 10, 20, 0.95); }
+
+        #right-dock { right: -160px; border-left: 2px solid var(--neon-blue); }
+        #right-dock:hover { right: 0; background: rgba(10, 10, 20, 0.95); }
+
+        .dock-label { 
+            writing-mode: vertical-rl; text-orientation: mixed; align-self: flex-end;
+            color: var(--neon-blue); font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 20px;
         }
-        .right-trigger:hover + #right-panel, #right-panel:hover { right: 0; }
+        #left-dock .dock-label { align-self: flex-start; color: var(--neon-purple); transform: rotate(180deg); }
 
-        /* Ortak Item Tasarımı */
-        .panel-title { font-family: 'Orbitron'; font-size: 0.7rem; color: #666; margin-bottom: 25px; letter-spacing: 2px; }
         .item {
-            text-decoration: none; color: #ccc; padding: 12px; margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
-            clip-path: polygon(0 0, 100% 0, 100% 75%, 85% 100%, 0 100%);
+            text-decoration: none; color: #fff; padding: 10px; margin: 8px 0;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(0, 242, 255, 0.1);
+            font-size: 0.9rem; transition: 0.3s; clip-path: polygon(0 0, 100% 0, 100% 80%, 85% 100%, 0 100%);
         }
-        .nav-item:hover { border-color: var(--neon-purple); color: var(--neon-purple); transform: translateX(8px); }
-        .tool-item:hover { border-color: var(--neon-blue); color: var(--neon-blue); transform: translateX(-8px); }
+        .item:hover { background: var(--neon-blue); color: #000; transform: scale(1.05); }
 
-        /* --- SECTIONS --- */
-        section { min-height: 100vh; padding: 100px 5% 50px 5%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .section-header { font-family: 'Orbitron'; font-size: 2.5rem; color: var(--neon-blue); margin-bottom: 40px; text-shadow: 0 0 10px var(--neon-blue); }
+        /* --- ORTA TARAF (İÇERİK DOLGUSU) --- */
+        section { min-height: 100vh; padding: 60px 250px; display: flex; flex-direction: column; justify-content: center; }
 
-        .about-box {
-            max-width: 700px; padding: 30px; border: 1px solid rgba(188, 19, 254, 0.3);
-            background: rgba(188, 19, 254, 0.05); position: relative; line-height: 1.6;
+        .hero-box { border-left: 4px solid var(--neon-blue); padding-left: 25px; margin-bottom: 50px; }
+        .hero-box h1 { font-family: 'Orbitron'; font-size: 4rem; margin: 0; letter-spacing: -2px; }
+
+        .data-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%;
+        }
+        .data-card {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px; position: relative; overflow: hidden;
+        }
+        .data-card h3 { color: var(--neon-blue); font-family: 'Orbitron'; margin-top: 0; }
+        .data-card::after { 
+            content: "DATA_NODE"; position: absolute; right: -10px; bottom: -10px; 
+            font-size: 3rem; opacity: 0.05; font-family: 'Orbitron'; 
         }
 
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; width: 100%; max-width: 800px; }
-        .tool-card {
-            padding: 20px; text-align: center; border: 1px solid var(--neon-blue);
-            background: rgba(0, 242, 255, 0.03); font-weight: bold;
-        }
+        /* Scanline Animasyonu */
+        .scan { width: 100%; height: 1px; background: var(--neon-blue); opacity: 0.2; position: absolute; animation: scanAnim 4s linear infinite; }
+        @keyframes scanAnim { from { top: 0; } to { top: 100%; } }
 
-        /* AR Bölümü Arka Planı */
-        #ar-experience { background: rgba(0, 242, 255, 0.02); }
-        .ar-btn {
-            padding: 20px 40px; border: 2px solid var(--neon-blue); background: none;
-            color: var(--neon-blue); font-family: 'Orbitron'; cursor: pointer;
-            transition: 0.3s; box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+        @media (max-width: 900px) {
+            section { padding: 60px 50px; }
+            .data-grid { grid-template-columns: 1fr; }
         }
-        .ar-btn:hover { background: var(--neon-blue); color: black; box-shadow: 0 0 30px var(--neon-blue); }
     </style>
 </head>
 <body>
 
-    <div class="left-trigger"></div>
-    <div class="right-trigger"></div>
+    <div id="left-dock" class="side-dock">
+        <div class="panel-title" style="color:var(--neon-purple)">NAV_SYS</div>
+        <a href="#home" class="item">HOME</a>
+        <a href="#about" class="item">ABOUT</a>
+        <a href="#stats" class="item">STATS</a>
+        <div class="dock-label">TERMINAL_MENU</div>
+    </div>
 
-    <nav id="left-panel">
-        <div class="panel-title">// MENU</div>
-        <a href="#home" class="item nav-item">START_CORE</a>
-        <a href="#about" class="item nav-item">USER_INFO</a>
-        <a href="#tools" class="item nav-item">TECH_STACK</a>
-        <a href="#ar-experience" class="item nav-item">AR_MODULE</a>
-    </nav>
-
-    <aside id="right-panel">
-        <div class="panel-title">// QUICK_ACCESS</div>
-        <a href="https://youtube.com" target="_blank" class="item tool-item">YOUTUBE</a>
-        <a href="https://unity.com" target="_blank" class="item tool-item">UNITY</a>
-        <a href="https://github.com" target="_blank" class="item tool-item">GITHUB</a>
-        <a href="https://visualstudio.microsoft.com" target="_blank" class="item tool-item">VS_CODE</a>
-    </aside>
+    <div id="right-dock" class="side-dock">
+        <div class="panel-title" style="color:var(--neon-blue)">EXTERNAL_LINKS</div>
+        <a href="https://youtube.com" class="item">YOUTUBE</a>
+        <a href="https://github.com" class="item">GITHUB</a>
+        <a href="https://unity.com" class="item">UNITY</a>
+        <div class="dock-label">QUICK_TOOLS</div>
+    </div>
 
     <section id="home">
-        <h1 class="section-header" style="font-size: 3.5rem;">FURKAN KORUK</h1>
-        <p style="color: var(--neon-purple); letter-spacing: 8px;">CYBERNETIC ARCHITECT</p>
-        <div style="margin-top: 50px; font-family: monospace; color: #444;">[ SYSTEM_READY: SCROLL_DOWN ]</div>
-    </section>
-
-    <section id="about">
-        <h2 class="section-header">ABOUT ME</h2>
-        <div class="about-box">
-            <p>Merhaba, ben Furkan. Yazılım dünyasında özellikle Artırılmış Gerçeklik (AR) ve Unity ekosistemi üzerine odaklanıyorum. Geleceğin teknolojilerini bugünün estetiğiyle birleştirmeyi seviyorum.</p>
-            <p style="color: var(--neon-purple); margin-top: 20px;">> Location: Istanbul / Turkey<br>> Focus: AR/VR Development</p>
+        <div class="scan"></div>
+        <div class="hero-box">
+            <h1 style="color: var(--neon-blue);">FURKAN</h1>
+            <h1 style="color: white; margin-top: -20px;">KORUK</h1>
+            <p style="color: var(--neon-purple); letter-spacing: 10px;">[ AR ARCHITECT v4.2 ]</p>
         </div>
-    </section>
-
-    <section id="tools">
-        <h2 class="section-header">TECH STACK</h2>
-        <div class="tools-grid">
-            <div class="tool-card">Unity 3D</div>
-            <div class="tool-card">C#</div>
-            <div class="tool-card">AR.js</div>
-            <div class="tool-card">JavaScript</div>
-            <div class="tool-card">A-Frame</div>
-            <div class="tool-card">HTML/CSS</div>
+        
+        <div class="data-grid">
+            <div class="data-card" id="about">
+                <h3>01_IDENTIFICATION</h3>
+                <p>Artırılmış gerçeklik dünyasında derinlemesine projeler geliştiren bir dijital mimar. Unity ve WebAR teknolojilerini kullanarak fiziksel dünya ile kodu birleştiriyor.</p>
+            </div>
+            <div class="data-card" id="stats">
+                <h3>02_TECH_RESOURCES</h3>
+                <div style="display:flex; justify-content:space-between; font-size: 0.8rem; color: #888;">
+                    <span>UNITY / C#</span><span>95%</span>
+                </div>
+                <div style="width:100%; height:4px; background:#222; margin-top:5px;"><div style="width:95%; height:100%; background:var(--neon-blue);"></div></div>
+                
+                <div style="display:flex; justify-content:space-between; font-size: 0.8rem; color: #888; margin-top:15px;">
+                    <span>WEB AR / JS</span><span>88%</span>
+                </div>
+                <div style="width:100%; height:4px; background:#222; margin-top:5px;"><div style="width:88%; height:100%; background:var(--neon-purple);"></div></div>
+            </div>
         </div>
-    </section>
-
-    <section id="ar-experience">
-        <h2 class="section-header">AR EXPERIENCE</h2>
-        <p style="margin-bottom: 30px;">Kamerayı başlatarak Anıtkabir AR modelini görüntüleyebilirsiniz.</p>
-        <button class="ar-btn" onclick="alert('AR Modülü Yükleniyor... QR Kodunuzu Hazırlayın!')">LAUNCH AR CORE</button>
     </section>
 
 </body>
