@@ -7,147 +7,192 @@
     <style>
         :root {
             --neon-blue: #00f3ff;
-            --neon-purple: #bc13fe;
-            --dark-bg: #050505;
+            --neon-purple: #7a1b99;
+            --bg-dark: #08090b;
+            --panel-bg: #121317;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-color: var(--dark-bg);
+            background-color: var(--bg-dark);
             color: white;
             font-family: 'Segoe UI', sans-serif;
-            margin: 0;
             display: flex;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* Yan Paneller */
-        .side-panel {
-            width: 180px;
-            padding: 20px 10px;
+        /* Yan Paneller - Fotoğraftaki gibi */
+        .side-bar {
+            width: 160px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            background: rgba(10, 10, 10, 0.8);
-            border-right: 1px solid var(--neon-purple);
-            border-left: 1px solid var(--neon-purple);
-            z-index: 10;
+            padding: 20px 10px;
+            background: #000;
+            position: relative;
         }
 
-        .side-right { border-left: 2px solid var(--neon-blue); border-right: none; }
-        .side-left { border-right: 2px solid var(--neon-purple); border-left: none; }
+        /* Sol Panel Çizgisi (Mor/Magenta) */
+        .side-left { border-right: 2px solid var(--neon-purple); }
+        /* Sağ Panel Çizgisi (Mavi) */
+        .side-right { border-left: 2px solid var(--neon-blue); }
 
-        .panel-label {
+        .panel-header {
             font-size: 10px;
             color: #444;
-            text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
-        /* Cyber Butonlar */
-        .cyber-link {
+        /* Fotoğraftaki Buton Tasarımı */
+        .cyber-btn {
+            display: block;
             text-decoration: none;
-            color: #ccc;
-            font-size: 12px;
-            padding: 12px;
+            color: #999;
+            background: #1a1b1f;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0% 100%);
             border: 1px solid #222;
-            background: rgba(255, 255, 255, 0.05);
-            transition: 0.3s;
-            clip-path: polygon(0 0, 90% 0, 100% 25%, 100% 100%, 10% 100%, 0 75%);
-            text-transform: uppercase;
-            text-align: center;
+            transition: 0.2s;
         }
 
-        .side-left .cyber-link:hover {
-            color: var(--neon-purple);
+        .side-left .cyber-btn:hover {
+            background: #2a1535;
+            color: #fff;
             border-color: var(--neon-purple);
-            box-shadow: inset 0 0 10px var(--neon-purple);
-            transform: translateX(5px);
         }
 
-        .side-right .cyber-link:hover {
-            color: var(--neon-blue);
+        .side-right .cyber-btn:hover {
+            background: #0d2a35;
+            color: #fff;
             border-color: var(--neon-blue);
-            box-shadow: inset 0 0 10px var(--neon-blue);
-            transform: translateX(-5px);
         }
 
         /* Orta Alan */
-        .main-content {
+        .main-container {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            position: relative;
+            padding: 40px;
+            background: radial-gradient(circle at center, #0f1115 0%, #08090b 100%);
         }
 
-        .main-content h1 {
-            font-size: 4rem;
-            letter-spacing: 8px;
-            text-shadow: 0 0 20px var(--neon-blue);
-            margin: 0;
+        .title {
+            font-size: 4.5rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px var(--neon-blue);
+            margin-bottom: 5px;
         }
 
-        .status {
+        .status-text {
             color: var(--neon-blue);
-            letter-spacing: 5px;
-            margin-bottom: 50px;
+            letter-spacing: 6px;
+            font-size: 14px;
+            margin-bottom: 60px;
         }
 
-        .box-container {
-            display: flex;
-            gap: 30px;
+        /* Orta Metin Alanı */
+        .description {
+            max-width: 600px;
+            border-left: 3px solid var(--neon-purple);
+            padding-left: 20px;
+            margin-bottom: 50px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .description b { color: #fff; }
+
+        /* Alt Kutular */
+        .grid-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
             max-width: 800px;
         }
 
-        .info-box {
+        .card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid #222;
-            padding: 20px;
-            text-align: left;
-            flex: 1;
+            border: 1px solid #1a1b1f;
+            padding: 25px;
         }
 
-        .info-box h3 { color: var(--neon-blue); margin-top: 0; }
-        .info-box p { font-size: 0.9rem; color: #aaa; line-height: 1.6; }
+        .card h3 {
+            color: var(--neon-blue);
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
 
+        .card p {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* Sağdaki Dikey Metin */
+        .vertical-text {
+            position: absolute;
+            right: 15px;
+            bottom: 100px;
+            transform: rotate(90deg);
+            transform-origin: bottom right;
+            color: var(--neon-blue);
+            font-size: 12px;
+            letter-spacing: 4px;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
 
-    <div class="side-panel side-left">
-        <div class="panel-label">// DEV_ENVIRONMENT</div>
-        <a href="https://github.com" target="_blank" class="cyber-link">GITHUB</a>
-        <a href="#" class="cyber-link">VS CODE</a>
-        <a href="https://unity.com" target="_blank" class="cyber-link">UNITY</a>
-        <a href="https://www.python.org" target="_blank" class="cyber-link">PYTHON</a>
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank" class="cyber-link">C#</a>
+    <div class="side-bar side-left">
+        <div class="panel-header">// DEV_ENVIRONMENT</div>
+        <a href="https://github.com/KULLANICI_ADIN" target="_blank" class="cyber-btn">GITHUB</a>
+        <a href="#" class="cyber-btn">VS CODE</a>
+        <a href="https://unity.com" target="_blank" class="cyber-btn">UNITY</a>
+        <a href="https://www.python.org" target="_blank" class="cyber-btn">PYTHON</a>
+        <a href="#" class="cyber-btn">C#</a>
+        <a href="#" class="cyber-btn">PROJECT_FILES</a>
     </div>
 
-    <div class="main-content">
-        <h1>FURKAN KORUK</h1>
-        <div class="status">STATUS: ACTIVE</div>
+    <div class="main-container">
+        <h1 class="title">FURKAN KORUK</h1>
+        <div class="status-text">STATUS: ACTIVE</div>
 
-        <div class="box-container">
-            <div class="info-box">
+        <div class="description">
+            <p><b>Neden Yazılım?</b> Çünkü koda dokunduğum an, kuralları benim koyduğum bir evren inşa ediyorum. Sadece ekrana yazı yazmıyorum; dünyayı daha interaktif bir hale getirmek için dijital katmanlar oluşturuyorum.</p>
+        </div>
+
+        <div class="grid-info">
+            <div class="card">
                 <h3>VİZYON</h3>
                 <p>Karmaşık problemleri, temiz kod ve etkileyici görsellerle çözmek. AR teknolojisini herkes için erişilebilir kılmak.</p>
             </div>
-            <div class="info-box">
+            <div class="card">
                 <h3>HEDEF</h3>
                 <p>Fiziksel dünya ile dijital dünyayı ayıran o ince çizgiyi tamamen ortadan kaldıracak sistemler geliştirmek.</p>
             </div>
         </div>
     </div>
 
-    <div class="side-panel side-right">
-        <div class="panel-label">// SOCIAL_&_ENGINE</div>
-        <a href="https://www.youtube.com" target="_blank" class="cyber-link">YOUTUBE</a>
-        <a href="https://store.epicgames.com" target="_blank" class="cyber-link">EPIC GAMES</a>
-        <a href="https://store.steampowered.com" target="_blank" class="cyber-link">STEAM</a>
+    <div class="side-bar side-right">
+        <div class="panel-header">// SOCIAL_&_ENGINE</div>
+        <a href="https://youtube.com/@KANAL_ADIN" target="_blank" class="cyber-btn">YOUTUBE</a>
+        <a href="EPIC_PROFIL_LINKIN_BURAYA" target="_blank" class="cyber-btn">EPIC GAMES</a>
+        <a href="STEAM_PROFIL_LINKIN_BURAYA" target="_blank" class="cyber-btn">STEAM</a>
+        
+        <div class="vertical-text">SOCIAL_&_ENGINE</div>
     </div>
 
 </body>
