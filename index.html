@@ -24,7 +24,7 @@
             border-image: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple)) 1;
         }
 
-        #left-dock { left: 0; border-right: 2px solid var(--neon-green); }
+        #left-dock { left: 0; border-right: 2px solid var(--neon-purple); }
         #left-dock:hover { width: 240px; }
 
         #right-dock { right: 0; border-left: 2px solid var(--neon-blue); }
@@ -38,9 +38,7 @@
         }
         .side-dock:hover .dock-header { display: none; }
 
-        .dock-content {
-            display: none; padding: 40px 20px; width: 200px;
-        }
+        .dock-content { display: none; padding: 40px 20px; width: 200px; }
         .side-dock:hover .dock-content { display: block; }
 
         .item {
@@ -54,18 +52,24 @@
         #right-dock .item:hover { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.1); transform: translateX(-10px); }
 
         /* --- ORTA ALAN --- */
-        section { min-height: 100vh; padding: 100px 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .hero-title { font-family: 'Orbitron'; font-size: 4rem; margin-bottom: 0; text-shadow: 0 0 20px var(--neon-blue); }
-        .hero-desc { max-width: 600px; text-align: left; border-left: 3px solid var(--neon-purple); padding-left: 20px; font-size: 1.1rem; line-height: 1.8; }
+        section { min-height: 100vh; padding: 100px 50px; display: flex; flex-direction: column; align-items: center; }
+        .hero-title { font-family: 'Orbitron'; font-size: 4rem; margin-bottom: 0; text-shadow: 0 0 20px var(--neon-blue); text-align: center; }
+        .hero-desc { max-width: 800px; text-align: left; border-left: 3px solid var(--neon-purple); padding-left: 20px; font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px;}
 
-        .grid-container {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 900px; margin-top: 50px;
-        }
-        .info-card {
-            background: rgba(255,255,255,0.02); border: 1px solid rgba(0, 242, 255, 0.1);
-            padding: 25px; position: relative;
-        }
-        .info-card h3 { color: var(--neon-blue); font-family: 'Orbitron'; margin-top: 0; }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 900px; margin-bottom: 50px; }
+        .info-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(0, 242, 255, 0.1); padding: 25px; }
+        .info-card h3 { color: var(--neon-blue); font-family: 'Orbitron'; margin-top: 0; font-size: 0.9rem; letter-spacing: 2px; }
+
+        /* --- DERS PROGRAMI TABLOSU --- */
+        .schedule-container { width: 100%; max-width: 1000px; background: rgba(10, 10, 20, 0.6); border: 1px solid var(--neon-purple); padding: 20px; box-shadow: 0 0 20px rgba(188, 19, 254, 0.2); }
+        .schedule-title { font-family: 'Orbitron'; color: var(--neon-purple); font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid var(--neon-purple); padding-bottom: 10px; }
+        
+        table { width: 100%; border-collapse: collapse; font-family: 'Rajdhani'; font-size: 0.85rem; }
+        th { font-family: 'Orbitron'; color: var(--neon-blue); padding: 10px; text-align: left; border-bottom: 1px solid rgba(0, 242, 255, 0.3); }
+        td { padding: 12px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        tr:hover { background: rgba(0, 242, 255, 0.05); }
+        .day-col { font-weight: bold; color: var(--neon-purple); width: 100px; }
+        .time-label { color: #666; font-size: 0.7rem; }
     </style>
 </head>
 <body>
@@ -74,12 +78,10 @@
         <div class="dock-header" style="color: var(--neon-purple);">CORE_DEVELOPMENT</div>
         <div class="dock-content">
             <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-bottom:10px;">// DEV_ACCOUNTS</div>
-            <a href="https://github.com/furkan08koruk-max" target="_blank" rel="noopener noreferrer" class="item">GITHUB</a>
-            
+            <a href="https://github.com/furkan08koruk-max" target="_blank" class="item">GITHUB</a>
             <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-top:20px; margin-bottom:10px;">// DEV_LAUNCHERS</div>
             <a href="unityhub://" class="item">UNITY HUB</a>
             <a href="vscode://" class="item">VS CODE / STUDIO</a>
-            
             <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-top:20px; margin-bottom:10px;">// PC_LAUNCHERS</div>
             <a href="com.epicgames.launcher://onaunch" class="item">EPIC GAMES</a>
             <a href="steam://open/main" class="item">STEAM</a>
@@ -90,18 +92,17 @@
         <div class="dock-header">SOCIAL_MEDIA</div>
         <div class="dock-content">
             <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-bottom:10px;">// CONNECT</div>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="item">YOUTUBE</a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="item">INSTAGRAM</a>
-            <a href="https://x.com/home?lang=en" target="_blank" rel="noopener noreferrer" class="item">X / TWITTER</a>
-            
+            <a href="https://www.youtube.com/" target="_blank" class="item">YOUTUBE</a>
+            <a href="https://www.instagram.com/" target="_blank" class="item">INSTAGRAM</a>
+            <a href="https://x.com/home?lang=en" target="_blank" class="item">X / TWITTER</a>
             <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-top:20px; margin-bottom:10px;">// ASSETS</div>
-            <a href="https://sketchfab.com" target="_blank" rel="noopener noreferrer" class="item">SKETCHFAB</a>
+            <a href="https://sketchfab.com" target="_blank" class="item">SKETCHFAB</a>
         </div>
     </div>
 
     <section id="home">
         <h1 class="hero-title">FURKAN KORUK</h1>
-        <p style="color:var(--neon-blue); font-family:'Orbitron'; letter-spacing:10px; margin-bottom:40px;">STATUS: ACTIVE</p>
+        <p style="color:var(--neon-blue); font-family:'Orbitron'; letter-spacing:10px; margin-bottom:40px; text-align: center; width: 100%;">STATUS: ACTIVE // 10A BİLİŞİM</p>
         
         <div class="hero-desc">
             <strong>Neden Yazılım?</strong> Çünkü koda dokunduğum an, kuralları benim koyduğum bir evren inşa ediyorum. Sadece ekrana yazı yazmıyorum; dünyayı daha interaktif bir hale getirmek için dijital katmanlar oluşturuyorum.
@@ -116,6 +117,50 @@
                 <h3>HEDEF</h3>
                 <p>Fiziksel dünya ile dijital dünyayı ayıran o ince çizgiyi tamamen ortadan kaldıracak sistemler geliştirmek.</p>
             </div>
+        </div>
+
+        <div class="schedule-container">
+            <div class="schedule-title">// WEEKLY_ACADEMIC_SCHEDULE</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>GÜN</th>
+                        <th>08:00 - 11:10</th>
+                        <th>11:20 - 14:10</th>
+                        <th>14:20 - 16:40</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day-col">PAZARTESİ</td>
+                        <td>Tarih <br><span class="time-label">F. Aytekin</span></td>
+                        <td>BEVS / Matematik <br><span class="time-label">R. Akyol / M. Kaytan</span></td>
+                        <td>İngilizce / TDB <br><span class="time-label">P. Aydın / E. Uzun</span></td>
+                    </tr>
+                    <tr>
+                        <td class="day-col">SALI</td>
+                        <td>Coğrafya <br><span class="time-label">S. Sabaz</span></td>
+                        <td>Kimya / Biyoloji <br><span class="time-label">F. Kaya / Ç. Öztoprak</span></td>
+                        <td>Matematik <br><span class="time-label">M. Kaytan</span></td>
+                    </tr>
+                    <tr>
+                        <td class="day-col">ÇARŞAMBA</td>
+                        <td colspan="3" style="text-align: center; color: var(--neon-blue); letter-spacing: 2px;">NESNE TABANLI PROGRAMLAMA (NTP) <br><span class="time-label">Z. Güven / S. Sinan / E. Kızılkaya</span></td>
+                    </tr>
+                    <tr>
+                        <td class="day-col">PERŞEMBE</td>
+                        <td>Edebiyat / Felsefe <br><span class="time-label">A. Danışır / K. Çetinkaya</span></td>
+                        <td>Rehberlik / DKAB <br><span class="time-label">T. Öztürk / Z. Kaban</span></td>
+                        <td>Adabı Muaşeret / Astronomi <br><span class="time-label">B. Arat / R. Akyol</span></td>
+                    </tr>
+                    <tr>
+                        <td class="day-col">CUMA</td>
+                        <td>Edebiyat / Robotik <br><span class="time-label">A. Danışır / P. Bayır</span></td>
+                        <td>Fizik <br><span class="time-label">T. Öztürk</span></td>
+                        <td>Matematik <br><span class="time-label">M. Kaytan</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
