@@ -62,14 +62,13 @@
 
         /* --- DERS PROGRAMI TABLOSU --- */
         .schedule-container { width: 100%; max-width: 1000px; background: rgba(10, 10, 20, 0.6); border: 1px solid var(--neon-purple); padding: 20px; box-shadow: 0 0 20px rgba(188, 19, 254, 0.2); }
-        .schedule-title { font-family: 'Orbitron'; color: var(--neon-purple); font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid var(--neon-purple); padding-bottom: 10px; }
+        .schedule-title { font-family: 'Orbitron'; color: var(--neon-purple); font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid var(--neon-purple); padding-bottom: 10px; text-align: center; letter-spacing: 5px; }
         
-        table { width: 100%; border-collapse: collapse; font-family: 'Rajdhani'; font-size: 0.85rem; }
+        table { width: 100%; border-collapse: collapse; font-family: 'Rajdhani'; font-size: 0.9rem; }
         th { font-family: 'Orbitron'; color: var(--neon-blue); padding: 10px; text-align: left; border-bottom: 1px solid rgba(0, 242, 255, 0.3); }
-        td { padding: 12px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        td { padding: 15px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         tr:hover { background: rgba(0, 242, 255, 0.05); }
-        .day-col { font-weight: bold; color: var(--neon-purple); width: 100px; }
-        .time-label { color: #666; font-size: 0.7rem; }
+        .day-col { font-weight: bold; color: var(--neon-purple); width: 120px; font-family: 'Orbitron'; font-size: 0.75rem; }
     </style>
 </head>
 <body>
@@ -102,7 +101,7 @@
 
     <section id="home">
         <h1 class="hero-title">FURKAN KORUK</h1>
-        <p style="color:var(--neon-blue); font-family:'Orbitron'; letter-spacing:10px; margin-bottom:40px; text-align: center; width: 100%;">STATUS: ACTIVE // 10A BİLİŞİM</p>
+        <p style="color:var(--neon-blue); font-family:'Orbitron'; letter-spacing:10px; margin-bottom:40px; text-align: center; width: 100%;">STATUS: ACTIVE</p>
         
         <div class="hero-desc">
             <strong>Neden Yazılım?</strong> Çünkü koda dokunduğum an, kuralları benim koyduğum bir evren inşa ediyorum. Sadece ekrana yazı yazmıyorum; dünyayı daha interaktif bir hale getirmek için dijital katmanlar oluşturuyorum.
@@ -120,7 +119,7 @@
         </div>
 
         <div class="schedule-container">
-            <div class="schedule-title">// WEEKLY_ACADEMIC_SCHEDULE</div>
+            <div class="schedule-title">DERS PROGRAMI</div>
             <table>
                 <thead>
                     <tr>
@@ -133,31 +132,31 @@
                 <tbody>
                     <tr>
                         <td class="day-col">PAZARTESİ</td>
-                        <td>Tarih <br><span class="time-label">F. Aytekin</span></td>
-                        <td>BEVS / Matematik <br><span class="time-label">R. Akyol / M. Kaytan</span></td>
-                        <td>İngilizce / TDB <br><span class="time-label">P. Aydın / E. Uzun</span></td>
+                        <td>Tarih</td>
+                        <td>BEVS / Matematik</td>
+                        <td>İngilizce / TDB</td>
                     </tr>
                     <tr>
                         <td class="day-col">SALI</td>
-                        <td>Coğrafya <br><span class="time-label">S. Sabaz</span></td>
-                        <td>Kimya / Biyoloji <br><span class="time-label">F. Kaya / Ç. Öztoprak</span></td>
-                        <td>Matematik <br><span class="time-label">M. Kaytan</span></td>
+                        <td>Coğrafya</td>
+                        <td>Kimya / Biyoloji</td>
+                        <td>Matematik</td>
                     </tr>
                     <tr>
                         <td class="day-col">ÇARŞAMBA</td>
-                        <td colspan="3" style="text-align: center; color: var(--neon-blue); letter-spacing: 2px;">NESNE TABANLI PROGRAMLAMA (NTP) <br><span class="time-label">Z. Güven / S. Sinan / E. Kızılkaya</span></td>
+                        <td colspan="3" style="text-align: center; color: var(--neon-blue); letter-spacing: 2px; font-weight: bold;">NESNE TABANLI PROGRAMLAMA (NTP)</td>
                     </tr>
                     <tr>
                         <td class="day-col">PERŞEMBE</td>
-                        <td>Edebiyat / Felsefe <br><span class="time-label">A. Danışır / K. Çetinkaya</span></td>
-                        <td>Rehberlik / DKAB <br><span class="time-label">T. Öztürk / Z. Kaban</span></td>
-                        <td>Adabı Muaşeret / Astronomi <br><span class="time-label">B. Arat / R. Akyol</span></td>
+                        <td>Edebiyat / Felsefe</td>
+                        <td>Rehberlik / DKAB</td>
+                        <td>Adabı Muaşeret / Astronomi</td>
                     </tr>
                     <tr>
                         <td class="day-col">CUMA</td>
-                        <td>Edebiyat / Robotik <br><span class="time-label">A. Danışır / P. Bayır</span></td>
-                        <td>Fizik <br><span class="time-label">T. Öztürk</span></td>
-                        <td>Matematik <br><span class="time-label">M. Kaytan</span></td>
+                        <td>Edebiyat / Robotik</td>
+                        <td>Fizik</td>
+                        <td>Matematik</td>
                     </tr>
                 </tbody>
             </table>
