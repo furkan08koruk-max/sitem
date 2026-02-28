@@ -55,7 +55,7 @@
 
         /* --- DERS PROGRAMI --- */
         .schedule-container { 
-            width: 100%; max-width: 1100px; background: rgba(10, 10, 20, 0.8); 
+            width: 100%; max-width: 1200px; background: rgba(10, 10, 20, 0.8); 
             border: 2px solid var(--neon-purple); padding: 25px; 
             box-shadow: 0 0 30px rgba(188, 19, 254, 0.2);
         }
@@ -67,9 +67,10 @@
         
         table { width: 100%; border-collapse: separate; border-spacing: 5px; font-family: 'Rajdhani'; }
         th { font-family: 'Orbitron'; color: var(--neon-blue); padding: 12px; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.2); }
-        td { padding: 20px 10px; text-align: center; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); font-size: 1.1rem; }
-        .day-col { font-weight: bold; color: var(--neon-purple); font-family: 'Orbitron'; font-size: 0.8rem; background: rgba(188, 19, 254, 0.05) !important; width: 120px; }
+        td { padding: 15px 8px; text-align: center; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); font-size: 1rem; }
+        .day-col { font-weight: bold; color: var(--neon-purple); font-family: 'Orbitron'; font-size: 0.8rem; background: rgba(188, 19, 254, 0.05) !important; width: 100px; }
         .ntp-cell { color: var(--neon-blue); letter-spacing: 2px; font-weight: bold; font-family: 'Orbitron'; }
+        .highlight { color: var(--neon-blue); font-weight: bold; }
     </style>
 </head>
 <body>
@@ -104,15 +105,16 @@
         </div>
 
         <div class="schedule-container">
-            <div class="schedule-title">DERS PROGRAMI</div>
+            <div class="schedule-title">HAFTALIK DERS PROGRAMI</div>
             <table>
                 <thead>
                     <tr>
                         <th>GÜN</th>
                         <th>08:00 - 09:30</th>
-                        <th>09:40 - 12:00</th>
-                        <th>12:10 - 14:10</th>
-                        <th>14:20 - 16:40</th>
+                        <th>09:40 - 11:10</th>
+                        <th>11:20 - 12:50</th>
+                        <th>13:30 - 15:00</th>
+                        <th>15:10 - 16:40</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,32 +123,36 @@
                         <td>Tarih</td>
                         <td>BEVS</td>
                         <td>Matematik</td>
-                        <td>İngilizce / TDB</td>
+                        <td>İngilizce</td>
+                        <td>TDB</td>
                     </tr>
                     <tr>
                         <td class="day-col">SALI</td>
-                        <td>Edebiyat</td>
-                        <td style="color: var(--neon-blue); font-weight: bold;">COĞRAFYA</td>
-                        <td>Biyoloji / Kimya</td>
+                        <td>---</td>
+                        <td class="highlight">COĞRAFYA</td>
+                        <td>Biyoloji</td>
+                        <td>Kimya</td>
                         <td>Matematik</td>
                     </tr>
                     <tr>
                         <td class="day-col">ÇARŞAMBA</td>
-                        <td colspan="4" class="ntp-cell">NESNE TABANLI PROGRAMLAMA (NTP)</td>
+                        <td colspan="5" class="ntp-cell">NESNE TABANLI PROGRAMLAMA (NTP)</td>
                     </tr>
                     <tr>
                         <td class="day-col">PERŞEMBE</td>
                         <td>Edebiyat</td>
                         <td>Felsefe</td>
-                        <td>Rehberlik / Astronomi</td>
-                        <td>DKAB / Adabı Muaşeret</td>
+                        <td>Rehberlik</td>
+                        <td>Din Kültürü</td>
+                        <td>Adabı Muaşeret / Astronomi</td>
                     </tr>
                     <tr>
                         <td class="day-col">CUMA</td>
                         <td>Edebiyat</td>
-                        <td style="color: var(--neon-blue);">ROBOTİK KODLAMA</td>
+                        <td class="highlight">ROBOTİK KODLAMA</td>
                         <td>FİZİK</td>
                         <td>MATEMATİK</td>
+                        <td>---</td>
                     </tr>
                 </tbody>
             </table>
