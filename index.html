@@ -53,10 +53,6 @@
         .hero-title { font-family: 'Orbitron'; font-size: 3.5rem; margin-bottom: 0; text-shadow: 0 0 20px var(--neon-blue); text-align: center; }
         .hero-desc { max-width: 800px; text-align: left; border-left: 3px solid var(--neon-purple); padding-left: 20px; font-size: 1.1rem; line-height: 1.6; margin: 30px 0;}
 
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 900px; margin-bottom: 40px; }
-        .info-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(0, 242, 255, 0.1); padding: 20px; }
-        .info-card h3 { color: var(--neon-blue); font-family: 'Orbitron'; margin-top: 0; font-size: 0.8rem; }
-
         /* --- DERS PROGRAMI --- */
         .schedule-container { 
             width: 100%; max-width: 1100px; background: rgba(10, 10, 20, 0.8); 
@@ -72,7 +68,7 @@
         table { width: 100%; border-collapse: separate; border-spacing: 5px; font-family: 'Rajdhani'; }
         th { font-family: 'Orbitron'; color: var(--neon-blue); padding: 12px; background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.2); }
         td { padding: 20px 10px; text-align: center; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); font-size: 1.1rem; }
-        .day-col { font-weight: bold; color: var(--neon-purple); font-family: 'Orbitron'; font-size: 0.8rem; background: rgba(188, 19, 254, 0.05) !important; }
+        .day-col { font-weight: bold; color: var(--neon-purple); font-family: 'Orbitron'; font-size: 0.8rem; background: rgba(188, 19, 254, 0.05) !important; width: 120px; }
         .ntp-cell { color: var(--neon-blue); letter-spacing: 2px; font-weight: bold; font-family: 'Orbitron'; }
     </style>
 </head>
@@ -107,11 +103,6 @@
             <strong>Neden Yazılım?</strong> Kod yazarken kendi kurallarımın olduğu bir evren inşa ediyorum. Dijital dünyayı daha interaktif kılmak için çalışıyorum.
         </div>
 
-        <div class="grid-container">
-            <div class="info-card"><h3>VİZYON</h3><p>Karmaşık problemleri temiz kodla çözmek.</p></div>
-            <div class="info-card"><h3>HEDEF</h3><p>Dijital ve fiziksel dünyayı birleştirmek.</p></div>
-        </div>
-
         <div class="schedule-container">
             <div class="schedule-title">DERS PROGRAMI</div>
             <table>
@@ -119,9 +110,9 @@
                     <tr>
                         <th>GÜN</th>
                         <th>08:00 - 09:30</th>
-                        <th>09:40 - 11:10</th>
-                        <th>11:20 - 12:50</th>
-                        <th>13:30 - 16:40</th>
+                        <th>09:40 - 12:00</th>
+                        <th>12:10 - 14:10</th>
+                        <th>14:20 - 16:40</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,9 +125,9 @@
                     </tr>
                     <tr>
                         <td class="day-col">SALI</td>
+                        <td>Edebiyat</td>
                         <td style="color: var(--neon-blue); font-weight: bold;">COĞRAFYA</td>
-                        <td>Biyoloji</td>
-                        <td>Kimya</td>
+                        <td>Biyoloji / Kimya</td>
                         <td>Matematik</td>
                     </tr>
                     <tr>
@@ -153,9 +144,9 @@
                     <tr>
                         <td class="day-col">CUMA</td>
                         <td>Edebiyat</td>
-                        <td>Robotik</td>
-                        <td>Fizik</td>
-                        <td>Matematik</td>
+                        <td style="color: var(--neon-blue);">ROBOTİK KODLAMA</td>
+                        <td>FİZİK</td>
+                        <td>MATEMATİK</td>
                     </tr>
                 </tbody>
             </table>
