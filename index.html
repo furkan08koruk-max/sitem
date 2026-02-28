@@ -60,15 +60,61 @@
         .info-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(0, 242, 255, 0.1); padding: 25px; }
         .info-card h3 { color: var(--neon-blue); font-family: 'Orbitron'; margin-top: 0; font-size: 0.9rem; letter-spacing: 2px; }
 
-        /* --- DERS PROGRAMI TABLOSU --- */
-        .schedule-container { width: 100%; max-width: 1000px; background: rgba(10, 10, 20, 0.6); border: 1px solid var(--neon-purple); padding: 20px; box-shadow: 0 0 20px rgba(188, 19, 254, 0.2); }
-        .schedule-title { font-family: 'Orbitron'; color: var(--neon-purple); font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid var(--neon-purple); padding-bottom: 10px; text-align: center; letter-spacing: 5px; }
+        /* --- BÜYÜTÜLMÜŞ DERS PROGRAMI --- */
+        .schedule-container { 
+            width: 100%; 
+            max-width: 1100px; 
+            background: rgba(10, 10, 20, 0.8); 
+            border: 2px solid var(--neon-purple); 
+            padding: 30px; 
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.3);
+            margin-top: 20px;
+        }
+        .schedule-title { 
+            font-family: 'Orbitron'; 
+            color: var(--neon-purple); 
+            font-size: 1.5rem; 
+            margin-bottom: 30px; 
+            border-bottom: 2px solid var(--neon-purple); 
+            padding-bottom: 15px; 
+            text-align: center; 
+            letter-spacing: 8px; 
+        }
         
-        table { width: 100%; border-collapse: collapse; font-family: 'Rajdhani'; font-size: 0.9rem; }
-        th { font-family: 'Orbitron'; color: var(--neon-blue); padding: 10px; text-align: left; border-bottom: 1px solid rgba(0, 242, 255, 0.3); }
-        td { padding: 15px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        tr:hover { background: rgba(0, 242, 255, 0.05); }
-        .day-col { font-weight: bold; color: var(--neon-purple); width: 120px; font-family: 'Orbitron'; font-size: 0.75rem; }
+        table { width: 100%; border-collapse: separate; border-spacing: 8px; font-family: 'Rajdhani'; }
+        th { 
+            font-family: 'Orbitron'; 
+            color: var(--neon-blue); 
+            padding: 15px; 
+            text-align: center; 
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            font-size: 1rem;
+        }
+        td { 
+            padding: 25px 15px; 
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        tr:hover td { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.05); }
+        .day-col { 
+            font-weight: bold; 
+            color: var(--neon-purple); 
+            width: 150px; 
+            font-family: 'Orbitron'; 
+            font-size: 0.9rem; 
+            background: rgba(188, 19, 254, 0.05) !important;
+        }
+        .ntp-cell { 
+            color: var(--neon-blue); 
+            letter-spacing: 3px; 
+            font-weight: bold; 
+            font-family: 'Orbitron';
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -76,92 +122,3 @@
     <div id="left-dock" class="side-dock">
         <div class="dock-header" style="color: var(--neon-purple);">CORE_DEVELOPMENT</div>
         <div class="dock-content">
-            <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-bottom:10px;">// DEV_ACCOUNTS</div>
-            <a href="https://github.com/furkan08koruk-max" target="_blank" class="item">GITHUB</a>
-            <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-top:20px; margin-bottom:10px;">// DEV_LAUNCHERS</div>
-            <a href="unityhub://" class="item">UNITY HUB</a>
-            <a href="vscode://" class="item">VS CODE / STUDIO</a>
-            <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-top:20px; margin-bottom:10px;">// PC_LAUNCHERS</div>
-            <a href="com.epicgames.launcher://onaunch" class="item">EPIC GAMES</a>
-            <a href="steam://open/main" class="item">STEAM</a>
-        </div>
-    </div>
-
-    <div id="right-dock" class="side-dock">
-        <div class="dock-header">SOCIAL_MEDIA</div>
-        <div class="dock-content">
-            <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-bottom:10px;">// CONNECT</div>
-            <a href="https://www.youtube.com/" target="_blank" class="item">YOUTUBE</a>
-            <a href="https://www.instagram.com/" target="_blank" class="item">INSTAGRAM</a>
-            <a href="https://x.com/home?lang=en" target="_blank" class="item">X / TWITTER</a>
-            <div style="font-family:'Orbitron'; font-size:0.6rem; color:#666; margin-top:20px; margin-bottom:10px;">// ASSETS</div>
-            <a href="https://sketchfab.com" target="_blank" class="item">SKETCHFAB</a>
-        </div>
-    </div>
-
-    <section id="home">
-        <h1 class="hero-title">FURKAN KORUK</h1>
-        <p style="color:var(--neon-blue); font-family:'Orbitron'; letter-spacing:10px; margin-bottom:40px; text-align: center; width: 100%;">STATUS: ACTIVE</p>
-        
-        <div class="hero-desc">
-            <strong>Neden Yazılım?</strong> Çünkü koda dokunduğum an, kuralları benim koyduğum bir evren inşa ediyorum. Sadece ekrana yazı yazmıyorum; dünyayı daha interaktif bir hale getirmek için dijital katmanlar oluşturuyorum.
-        </div>
-
-        <div class="grid-container">
-            <div class="info-card">
-                <h3>VİZYON</h3>
-                <p>Karmaşık problemleri, temiz kod ve etkileyici görsellerle çözmek. AR teknolojisini herkes için erişilebilir kılmak.</p>
-            </div>
-            <div class="info-card">
-                <h3>HEDEF</h3>
-                <p>Fiziksel dünya ile dijital dünyayı ayıran o ince çizgiyi tamamen ortadan kaldıracak sistemler geliştirmek.</p>
-            </div>
-        </div>
-
-        <div class="schedule-container">
-            <div class="schedule-title">DERS PROGRAMI</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>GÜN</th>
-                        <th>08:00 - 09:30</th>
-                        <th>09:40 - 12:50</th>
-                        <th>13:30 - 16:40</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="day-col">PAZARTESİ</td>
-                        <td>Tarih</td>
-                        <td>Matematik / BEVS</td>
-                        <td>İngilizce / TDB</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">SALI</td>
-                        <td>Kimya</td>
-                        <td>Coğrafya</td>
-                        <td>Biyoloji / Matematik</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">ÇARŞAMBA</td>
-                        <td colspan="3" style="text-align: center; color: var(--neon-blue); letter-spacing: 2px; font-weight: bold;">NESNE TABANLI PROGRAMLAMA (NTP)</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">PERŞEMBE</td>
-                        <td>Edebiyat</td>
-                        <td>Felsefe / Rehberlik</td>
-                        <td>DKAB / Adabı Muaşeret</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">CUMA</td>
-                        <td>Matematik</td>
-                        <td>Robotik / Fizik</td>
-                        <td>Edebiyat</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-</body>
-</html>
